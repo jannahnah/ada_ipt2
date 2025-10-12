@@ -1,8 +1,12 @@
+/* =================================================== */
+/* --- GLOBAL LIGHT THEME STYLES --- */
+/* =================================================== */
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 0;
-    background-color: #0d1117; /* Dark background */
-    color: #c9d1d9; /* Light text */
+    background-color: #f7f7f7; /* Very light off-white background */
+    color: #333; /* Dark text for high contrast and readability */
 }
 
 /* Navbar */
@@ -11,8 +15,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background-color: #161b22;
-    border-bottom: 1px solid #30363d;
+    background-color: #ffffff; /* White background */
+    border-bottom: 1px solid #e0e0e0; /* Light grey border */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-left {
@@ -24,24 +29,24 @@ body {
 .logo {
     font-size: 20px;
     font-weight: bold;
-    color: #58a6ff; /* A distinct color for the logo */
+    color: #007bff; /* Primary blue for the logo */
 }
 
 .nav-item {
     text-decoration: none;
-    color: #c9d1d9;
+    color: #555;
     padding: 5px 10px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .nav-item:hover {
-    background-color: #21262d;
+    background-color: #f0f0f0; /* Light hover background */
 }
 
 .nav-item.active {
-    color: #58a6ff;
-    border-bottom: 2px solid #58a6ff;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
 }
 
 .navbar-right {
@@ -50,17 +55,23 @@ body {
     gap: 15px;
 }
 
-.navbar-right .fas.fa-search {
-    color: #c9d1d9;
-    font-size: 18px;
+.search-icon, .profile-icon, .menu-toggle-btn {
+    color: #555;
     cursor: pointer;
 }
+.search-icon:hover {
+    color: #007bff;
+}
 
-.profile-pic img {
+.profile-pic {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #58a6ff;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
 }
 
 /* Container */
@@ -69,43 +80,38 @@ body {
 }
 
 .module-header h1 {
-    color: #e6edf3;
+    color: #222;
     font-size: 28px;
     margin-bottom: 20px;
 }
 
-/* Management Section */
+/* Management Section (Info Card) */
 .management-section {
     display: flex;
-    background-color: #161b22;
-    border: 1px solid #30363d;
+    background-color: #ffffff; /* White background */
+    border: 1px solid #e0e0e0; /* Light border */
     border-radius: 8px;
     padding: 25px;
     margin-bottom: 30px;
     gap: 25px;
     align-items: center;
-}
-
-.management-image img {
-    width: 200px; /* Adjust as needed */
-    height: auto;
-    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .management-content h2 {
-    color: #e6edf3;
+    color: #222;
     font-size: 22px;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
 .management-content p {
-    color: #c9d1d9;
+    color: #555;
     line-height: 1.6;
     font-size: 15px;
 }
 
-/* Controls Section */
+/* Controls Section (Search, Filters, Add Button) */
 .controls-section {
     display: flex;
     gap: 15px;
@@ -121,14 +127,14 @@ body {
     width: 100%;
     padding: 10px 15px;
     border-radius: 6px;
-    border: 1px solid #30363d;
-    background-color: #0d1117;
-    color: #c9d1d9;
+    border: 1px solid #ccc;
+    background-color: #ffffff; /* White background */
+    color: #333;
     font-size: 14px;
 }
 
 .search-bar input::placeholder {
-    color: #8b949e;
+    color: #999;
 }
 
 .filters {
@@ -139,20 +145,21 @@ body {
 .filter-dropdown {
     padding: 10px 15px;
     border-radius: 6px;
-    border: 1px solid #30363d;
-    background-color: #0d1117;
-    color: #c9d1d9;
+    border: 1px solid #ccc;
+    background-color: #ffffff; /* White background */
+    color: #333;
     font-size: 14px;
-    appearance: none; /* Remove default arrow */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c9d1d9%22%20d%3D%22M287%20163.6c-4.5%204.5-10.7%207-17%207s-12.5-2.5-17-7L146.2%2057.4%2039.4%20163.6c-4.5%204.5-10.7%207-17%207s-12.5-2.5-17-7c-9-9-9-23.5%200-32.5L129.2%2025.2c4.5-4.5%2010.7-7%2017-7s12.5%202.5%2017%207l126.8%20105.9c9%209%209%2023.5%200%2032.5z%22%2F%3E%3C%2Fsvg%3E');
+    appearance: none;
+    /* Custom dark arrow for light background */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23444444%22%20d%3D%22M287%20163.6c-4.5%204.5-10.7%207-17%207s-12.5-2.5-17-7L146.2%2057.4%2039.4%20163.6c-4.5%204.5-10.7%207-17%207s-12.5-2.5-17-7c-9-9-9-23.5%200-32.5L129.2%2025.2c4.5-4.5%2010.7-7%2017-7s12.5%202.5%2017%207l126.8%20105.9c9%209%209%2023.5%200%2032.5z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     background-size: 10px auto;
-    padding-right: 30px; /* Make space for the custom arrow */
+    padding-right: 30px;
 }
 
 .add-student-btn {
-    background-color: #2ea043; /* Green button */
+    background-color: #007bff; /* Primary blue button */
     color: white;
     padding: 10px 18px;
     border: none;
@@ -166,16 +173,17 @@ body {
 }
 
 .add-student-btn:hover {
-    background-color: #238636;
+    background-color: #0056b3;
 }
 
 /* Table Section */
 .table-section {
-    background-color: #161b22;
-    border: 1px solid #30363d;
+    background-color: #ffffff; /* White table background */
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow-x: auto;
     margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 table {
@@ -186,26 +194,28 @@ table {
 th, td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #30363d;
-    color: #c9d1d9;
+    border-bottom: 1px solid #eee; /* Lighter separator */
+    color: #333;
     font-size: 14px;
 }
 
 th {
-    background-color: #161b22;
+    background-color: #f5f5f5; /* Light header background */
     font-weight: 600;
-    color: #8b949e;
+    color: #555;
     text-transform: uppercase;
     font-size: 13px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 tbody tr:hover {
-    background-color: #21262d;
+    background-color: #f9f9f9; /* Subtle hover effect */
 }
 
+/* Status Badges */
 .status-active {
-    color: #3fb950; /* Green for active */
-    background-color: #23863620; /* Light green background */
+    color: #155724; /* Dark Green Text */
+    background-color: #d4edda; /* Light Green Background */
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
@@ -213,8 +223,8 @@ tbody tr:hover {
 }
 
 .status-leave {
-    color: #d29922; /* Yellow for on leave */
-    background-color: #d2992220; /* Light yellow background */
+    color: #856404; /* Dark Yellow Text */
+    background-color: #fff3cd; /* Light Yellow Background */
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
@@ -222,8 +232,17 @@ tbody tr:hover {
 }
 
 .status-graduated {
-    color: #8b949e; /* Grey for graduated */
-    background-color: #8b949e20; /* Light grey background */
+    color: #004085; /* Dark Blue Text */
+    background-color: #cce5ff; /* Light Blue Background */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+/* Default/Inactive status */
+.status-default {
+    color: #6c757d; /* Dark Grey Text */
+    background-color: #f0f0f0; /* Light Grey Background */
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
@@ -237,7 +256,7 @@ tbody tr:hover {
 
 .action-btn {
     padding: 8px 12px;
-    border: 1px solid #30363d;
+    border: 1px solid #ccc; /* Light border */
     border-radius: 6px;
     cursor: pointer;
     font-size: 13px;
@@ -245,104 +264,319 @@ tbody tr:hover {
     align-items: center;
     gap: 6px;
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: #fff;
 }
 
 .edit-btn {
-    background-color: transparent;
-    color: #58a6ff;
+    color: #007bff;
 }
 
 .edit-btn:hover {
-    background-color: #21262d;
-    border-color: #58a6ff;
+    background-color: #f0f0f0;
+    border-color: #007bff;
 }
 
 .archive-btn {
-    background-color: transparent;
-    color: #f85149;
+    color: #dc3545; /* Red for danger */
 }
 
 .archive-btn:hover {
-    background-color: #21262d;
-    border-color: #f85149;
+    background-color: #f0f0f0;
+    border-color: #dc3545;
 }
 
 /* Pagination */
 .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* Align right to match standard web apps */
     align-items: center;
-    padding: 15px;
+    padding: 15px 0;
     gap: 10px;
-    border-top: 1px solid #30363d;
+    border-top: 1px solid #e0e0e0;
 }
 
 .pagination button {
-    background-color: transparent;
-    color: #58a6ff;
-    border: 1px solid #30363d;
+    background-color: #ffffff;
+    color: #555;
+    border: 1px solid #ccc;
     padding: 8px 15px;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 14px;
 }
 
-.pagination button:hover {
-    background-color: #21262d;
+.pagination button:hover:not(:disabled) {
+    background-color: #f0f0f0;
 }
 
-.pagination span {
-    background-color: #58a6ff;
+.pagination button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.pagination .page-numbers button {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    margin: 0 4px;
+    font-weight: normal;
+}
+
+.pagination .page-numbers button.active {
+    background-color: #007bff;
     color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
+    border-color: #007bff;
     font-weight: bold;
-}
-
-.pagination a {
-    text-decoration: none;
-    color: #c9d1d9;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-.pagination a:hover {
-    background-color: #21262d;
 }
 
 /* Footer */
 .footer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     padding: 20px 30px;
-    background-color: #161b22;
-    border-top: 1px solid #30363d;
+    background-color: #ffffff; /* White background */
+    border-top: 1px solid #e0e0e0;
     margin-top: 30px;
     font-size: 14px;
-    color: #8b949e;
+    color: #777;
 }
 
-.footer-left a {
+.footer-left {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.footer a {
     text-decoration: none;
-    color: #8b949e;
-    margin-right: 20px;
+    color: #777;
     transition: color 0.3s ease;
 }
 
-.footer-left a:hover {
-    color: #c9d1d9;
+.footer a:hover {
+    color: #333;
 }
 
-.footer-right i {
-    font-size: 18px;
-    margin-left: 15px;
-    color: #8b949e;
+/* =================================================== */
+/* --- ADD/EDIT STUDENT FORM STYLES (LIGHT MODE) --- */
+/* These styles are integrated to match your image design */
+/* =================================================== */
+
+.form-page-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+    color: #555; 
+    text-decoration: none;
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: color 0.3s ease;
+    font-size: 14px;
+    transition: color 0.2s ease;
 }
 
-.footer-right i:hover {
-    color: #c9d1d9;
+.back-btn:hover {
+    color: #007bff;
+}
+
+.form-title {
+    color: #222; 
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-container {
+    background-color: white; 
+    padding: 40px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #e0e0e0;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-section {
+    padding-top: 20px;
+}
+
+.form-subtitle {
+    color: #222;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.form-group-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 20px; 
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-field {
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box; 
+    
+    &:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+}
+
+.form-input.disabled-input,
+.form-select.disabled-input,
+.form-input[disabled],
+.form-input[readonly] {
+    background-color: #f5f5f5; 
+    color: #777;
+    cursor: not-allowed;
+    border-color: #ddd;
+}
+
+.form-select.filter-dropdown {
+    /* Ensures form selects look like the light mode images */
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    /* Reverts to default select appearance or uses the light theme arrow defined above */
+    background-image: none; 
+    padding-right: 12px;
+}
+
+/* --- Radio Button Styling (for Edit Status) --- */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.radio-input {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    top: 0;
+
+    &:checked {
+        border-color: #007bff;
+        background-color: #007bff;
+    }
+
+    &:checked::after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+/* --- Form Actions/Buttons --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 25px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn {
+    background-color: white;
+    color: #555;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    margin-right: 15px;
+    
+    &:hover {
+        background-color: #f0f0f0;
+    }
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff; 
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+        background-color: #0056b3;
+    }
+    
+    &.add-student-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
 }
