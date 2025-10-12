@@ -1,0 +1,142 @@
+/* Updated example.scss */
+
+.home {
+  /* Full-width wrapper with custom padding */
+  display: block;
+  padding: 2rem 3rem;
+  font-family: "Poppins", "Helvetica", sans-serif; /* Updated font */
+  background-color: #f1f5f9; /* Lighter background for modern feel */
+  min-height: 100vh;
+
+  .container {
+    /* Centered container with smooth shadows */
+    width: 100%;
+    max-width: 1200px; /* Limit max-width */
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px; /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow */
+    margin: 0 auto; /* Center the container */
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px); /* Subtle hover effect for the container */
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+
+      input,
+      select {
+        padding: 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 12px; /* Slightly more rounded inputs */
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #f9fafb;
+
+        &:focus {
+          outline: none;
+          border-color: #4caf50; /* Green focus border */
+          box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+        }
+      }
+
+      button {
+        grid-column: span 2;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-weight: 500;
+      }
+
+      button[type="submit"] {
+        background: #4caf50; /* Green background */
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+
+        &:hover {
+          background: #388e3c; /* Darker green on hover */
+        }
+      }
+
+      .cancel-btn {
+        background: #f1f5f9; /* Soft gray background */
+        color: #333;
+
+        &:hover {
+          background: #e0e7ff; /* Light blue hover effect */
+        }
+      }
+    }
+
+    table {
+      margin-top: 2.5rem;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      border-radius: 12px; /* Slightly rounded table edges */
+
+      thead {
+        background: #e0e7ff; /* Soft blue header */
+        border-radius: 10px 10px 0 0;
+
+        th {
+          text-align: left;
+          padding: 1rem;
+          font-weight: 600;
+          color: #333;
+        }
+      }
+
+      tbody tr {
+        border-bottom: 1px solid #e5e7eb;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: #e0f7fa; /* Light cyan hover effect */
+        }
+
+        td {
+          padding: 1rem;
+          color: #555;
+        }
+
+        .edit-btn,
+        .delete-btn {
+          padding: 0.6rem 1rem;
+          font-size: 1rem;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: 500;
+        }
+
+        .edit-btn {
+          background: #ff9800; /* Orange edit button */
+          color: #fff;
+
+          &:hover {
+            background: #f57c00; /* Darker orange on hover */
+          }
+        }
+
+        .delete-btn {
+          background: #f44336; /* Red delete button */
+          color: #fff;
+
+          &:hover {
+            background: #d32f2f; /* Darker red on hover */
+          }
+        }
+      }
+    }
+  }
+}
