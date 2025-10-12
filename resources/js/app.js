@@ -19,16 +19,12 @@ require('./components/Routers');
 require('./bootstrap'); 
 
 import React from 'react';
-import { createRoot } from 'react-dom';
-// CRITICAL FIX: Import the component from its correct name (student.js)
-import StudentDashboard from './components/student.js'; 
+import ReactDOM from 'react-dom';
+
+import Student from './components/student.js'; 
 
 // Check if the HTML element exists before mounting
 if (document.getElementById('student-app')) {
-    // Use the modern createRoot method for React 18+
-    const root = createRoot(document.getElementById('student-app'));
-    
-    // Render the main component
-    root.render(<StudentDashboard />);
+    ReactDOM.render(<Student />, document.getElementById('student-app'));
 }
 
