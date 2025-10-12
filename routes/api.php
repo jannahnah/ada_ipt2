@@ -31,12 +31,9 @@ Route::delete('/profiles/{profile}', [ProfileController::class, 'destroy']);
 // This defines the resourceful routes for the REST API
 Route::resource('students', StudentController::class);
 
-// This provides the following endpoints:
-// GET    /api/students       -> index (List all students)
-// POST   /api/students       -> store (Create a new student)
-// GET    /api/students/{id}  -> show (View a single student)
-// PUT/PATCH /api/students/{id} -> update (Modify a student)
-// DELETE /api/students/{id}  -> destroy (Delete a student)
+// Utility routes to fetch options for dropdowns (Courses and Departments)
+Route::get('/courses/options', [CourseController::class, 'options']);
+Route::get('/departments/options', [DepartmentController::class, 'options']);
 
 Route::middleware('auth:api')->group(function () {
     

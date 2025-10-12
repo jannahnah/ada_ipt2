@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            // This ensures your initial data is always loaded
+            InitialDataSeeder::class,
+        ]);
     }
 }

@@ -9,22 +9,17 @@ class Course extends Model
 {
     use HasFactory;
 
-    // Explicitly define the table name
-    protected $table = 'courses';
-
-    // Define the custom primary key
+    // Explicitly set the primary key name to match the migration
     protected $primaryKey = 'CourseID';
 
-    // Allow mass assignment for these fields
+    // Mass assignable attributes
     protected $fillable = ['title', 'course_code'];
 
     /**
-     * Get the students associated with the course.
+     * Get the students for the course.
      */
     public function students()
     {
-        // One Course has many Students
-        // We use the custom foreign key 'CourseID'
         return $this->hasMany(Student::class, 'CourseID', 'CourseID');
     }
 }

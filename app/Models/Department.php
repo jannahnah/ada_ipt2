@@ -9,22 +9,17 @@ class Department extends Model
 {
     use HasFactory;
     
-    // Explicitly define the table name
-    protected $table = 'departments';
-    
-    // Define the custom primary key
+    // Explicitly set the primary key name to match the migration
     protected $primaryKey = 'DepartmentID';
     
-    // Allow mass assignment for these fields
+    // Mass assignable attributes
     protected $fillable = ['name', 'code'];
-    
+
     /**
-     * Get the students associated with the department.
+     * Get the students for the department.
      */
     public function students()
     {
-        // One Department has many Students
-        // We use the custom foreign key 'DepartmentID'
         return $this->hasMany(Student::class, 'DepartmentID', 'DepartmentID');
     }
 }
