@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 // Icons from Lucide for a modern look
-import { Search, ChevronDown, Plus, Edit, Archive, User, Menu, X } from 'lucide-react';
+// ADDED GraduationCap, UserCheck, UserX for dynamic stats
+import { Search, ChevronDown, Plus, Edit, Archive, User, Menu, X, Settings, LayoutDashboard, UserCheck, UserX, GraduationCap } from 'lucide-react';
 
 // --- MOCK DATA (to simulate fetching from your Laravel API) ---
 const MOCK_STUDENTS = [
@@ -18,28 +19,39 @@ const DEPARTMENTS = ['Engineering', 'Business', 'Sciences', 'Humanities'];
 
 // --- Components ---
 
-// Navbar Component
+// Navbar Component - Updated for the cleaner, darker look of the reference
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="bg-gray-800 p-4 border-b border-gray-700">
+        <header className="bg-[#1f2937] p-4 shadow-lg sticky top-0 z-10">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo and Nav Links */}
                 <div className="flex items-center space-x-8">
-                    <span className="text-xl font-bold text-teal-400">★logo</span>
+                    {/* Updated logo to match the visual style of the reference */}
+                    <span className="text-xl font-extrabold text-[#4f46e5] flex items-center">
+                        <span className="text-3xl mr-1">★</span>logo
+                    </span>
                     <nav className="hidden md:flex space-x-6 text-sm">
-                        <a href="#" className="text-white font-semibold">Students</a>
+                        <a href="#" className="text-white font-semibold border-b-2 border-[#4f46e5] pb-1">Students</a>
                         <a href="#" className="text-gray-400 hover:text-white transition duration-150">Reports</a>
-                        <a href="#" className="text-gray-400 hover:text-white transition duration-150">System Settings</a>
+                        <a href="#" className="text-gray-400 hover:text-white transition duration-150 flex items-center space-x-1">
+                            <span>System Settings</span>
+                        </a>
                     </nav>
                 </div>
 
                 {/* Search and User */}
                 <div className="flex items-center space-x-4">
                     <Search className="h-5 w-5 text-gray-400 cursor-pointer hover:text-white hidden md:block" />
-                    <div className="h-8 w-8 rounded-full bg-gray-600 flex items-center justify-center cursor-pointer border-2 border-teal-400">
-                        <User className="h-4 w-4 text-white" />
+                    <div className="flex items-center space-x-2">
+                        <a href="#" className="text-gray-400 hover:text-white hidden md:block">
+                            <Settings className="h-5 w-5" />
+                        </a>
+                        <div className="h-9 w-9 rounded-full bg-gray-600 flex items-center justify-center cursor-pointer border-2 border-transparent hover:border-[#4f46e5] transition duration-150 overflow-hidden">
+                            {/* Placeholder for the user's actual profile picture */}
+                            <User className="h-5 w-5 text-white" />
+                        </div>
                     </div>
                     {/* Mobile Menu Button */}
                     <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
@@ -50,8 +62,8 @@ const Navbar = () => {
             
             {/* Mobile Menu */}
             {isOpen && (
-                <nav className="md:hidden mt-4 space-y-2 px-2 text-sm text-center">
-                    <a href="#" className="block text-white font-semibold p-2 bg-gray-700 rounded-lg">Students</a>
+                <nav className="md:hidden mt-4 space-y-2 px-2 text-sm text-center bg-[#293749] p-2 rounded-lg">
+                    <a href="#" className="block text-white font-semibold p-2 bg-[#4f46e5]/10 rounded-lg">Students</a>
                     <a href="#" className="block text-gray-400 hover:text-white p-2 hover:bg-gray-700 rounded-lg">Reports</a>
                     <a href="#" className="block text-gray-400 hover:text-white p-2 hover:bg-gray-700 rounded-lg">System Settings</a>
                     <Search className="h-5 w-5 text-gray-400 mx-auto mt-4 cursor-pointer" />
@@ -61,30 +73,56 @@ const Navbar = () => {
     );
 };
 
-// Header/Banner Component
-const HeaderBanner = () => (
-    <div className="p-8 bg-gray-800 rounded-xl shadow-lg flex flex-col lg:flex-row items-center justify-start mb-8">
-        <div className="w-full lg:w-1/3 mb-6 lg:mb-0 lg:pr-8">
-            {/* Placeholder for the image */}
-            <div className="p-4 bg-gray-700 rounded-lg flex justify-center items-center h-48">
-                <img 
-                    src="https://placehold.co/200x150/1f2937/ffffff?text=Student+Image" 
-                    alt="Students in a meeting" 
-                    className="rounded-md max-h-full max-w-full"
-                    onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/200x150/1f2937/ffffff?text=Student+Image" }}
-                />
-            </div>
+// NEW COMPONENT: Dynamic Statistics Card
+const StatsCard = ({ title, value, icon: Icon, colorClass }) => (
+    <div className="flex items-center p-4 bg-[#1f2937] rounded-lg border border-gray-700 shadow-xl transition duration-300 hover:shadow-2xl hover:border-[#4f46e5]">
+        <div className={`p-3 rounded-full ${colorClass} bg-opacity-20 mr-4`}>
+            <Icon className={`h-6 w-6 ${colorClass}`} />
         </div>
-        <div className="w-full lg:w-2/3 text-center lg:text-left">
-            <h1 className="text-3xl font-bold text-white mb-2">Manage Your Student Records Seamlessly</h1>
-            <p className="text-gray-400">
-                Efficiently add, update, and archive student information. Utilize powerful search and filter options to quickly find specific students by course or department, ensuring your data is always organized and accessible.
-            </p>
+        <div>
+            <p className="text-sm font-medium text-gray-400">{title}</p>
+            <p className="text-2xl font-bold text-white">{value}</p>
         </div>
     </div>
 );
 
-// Filter/Action Bar Component
+
+// REFACTORED Header/Banner Component - Now displays dynamic statistics
+const HeaderBanner = ({ studentStats }) => (
+    <div className="mb-8 space-y-6">
+        {/* Management Heading and Description */}
+        <div className="p-8 bg-[#293749] rounded-xl shadow-2xl border border-gray-700">
+            <h1 className="text-2xl font-bold text-white mb-2">Manage Your Student Records Seamlessly</h1>
+            <p className="text-gray-400">
+                Efficiently view, search, and manage all student data. Quick insights are available below, highlighting the current status of your school population.
+            </p>
+        </div>
+
+        {/* Dynamic Statistics Section (Cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <StatsCard 
+                title="Total Students"
+                value={studentStats.total}
+                icon={GraduationCap}
+                colorClass="text-[#4f46e5]" // Indigo/Blue
+            />
+            <StatsCard 
+                title="Currently Active"
+                value={studentStats.active}
+                icon={UserCheck}
+                colorClass="text-green-400"
+            />
+            <StatsCard 
+                title="On Leave/Inactive"
+                value={studentStats.inactive}
+                icon={UserX}
+                colorClass="text-red-400"
+            />
+        </div>
+    </div>
+);
+
+// Filter/Action Bar Component - Updated styling for inputs and button
 const FilterBar = ({ searchTerm, setSearchTerm, filters, setFilters, handleNewStudent }) => {
     const handleFilterChange = (key, value) => {
         setFilters(prev => ({ ...prev, [key]: value === 'All' ? '' : value }));
@@ -92,13 +130,14 @@ const FilterBar = ({ searchTerm, setSearchTerm, filters, setFilters, handleNewSt
 
     return (
         <div className="flex flex-col md:flex-row items-stretch md:items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+            
             {/* Search Input */}
             <div className="relative flex-grow">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                     type="text"
                     placeholder="Search students by name, ID, or email..."
-                    className="w-full pl-10 pr-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition duration-150"
+                    className="w-full pl-10 pr-4 py-2 bg-[#1f2937] text-white border border-gray-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-[#4f46e5] transition duration-150 text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -120,24 +159,24 @@ const FilterBar = ({ searchTerm, setSearchTerm, filters, setFilters, handleNewSt
                 onChange={(value) => handleFilterChange('department', value)}
             />
 
-            {/* Add New Student Button */}
+            {/* Add New Student Button - Updated color and shadow to match the reference */}
             <button
                 onClick={handleNewStudent}
-                className="flex items-center justify-center px-4 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition duration-150 shadow-lg shadow-teal-900/50 min-w-[150px]"
+                className="flex items-center justify-center px-4 py-2 bg-[#4f46e5] text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md shadow-[#4f46e5]/50 min-w-[150px] text-sm"
             >
-                <Plus className="h-5 w-5 mr-2" />
+                <Plus className="h-4 w-4 mr-2" />
                 Add New Student
             </button>
         </div>
     );
 };
 
-// Generic Dropdown Component
+// Generic Dropdown Component - Updated styling
 const FilterDropdown = ({ label, options, current, onChange }) => {
     return (
         <div className="relative text-sm min-w-[150px]">
             <select
-                className="w-full appearance-none bg-gray-700 text-white py-2 px-4 pr-10 border border-gray-600 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition duration-150 cursor-pointer"
+                className="w-full appearance-none bg-[#1f2937] text-gray-300 py-2 px-4 pr-10 border border-gray-700 rounded-lg focus:ring-1 focus:ring-[#4f46e5] focus:border-[#4f46e5] transition duration-150 cursor-pointer text-sm"
                 value={current || 'All'}
                 onChange={(e) => onChange(e.target.value)}
             >
@@ -151,7 +190,7 @@ const FilterDropdown = ({ label, options, current, onChange }) => {
 };
 
 
-// Student Table Component
+// Student Table Component - Updated table styling for a better dark theme contrast
 const StudentTable = ({ students }) => {
     // Helper to determine status styling
     const getStatusStyle = (status) => {
@@ -167,27 +206,43 @@ const StudentTable = ({ students }) => {
         }
     };
 
+    // Helper component for styled action buttons
+    const ActionButton = ({ onClick, label, icon: Icon, colorClass, hoverClass }) => (
+        <button 
+            onClick={onClick}
+            className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-lg transition duration-150 ${colorClass} ${hoverClass} hover:shadow-md min-w-[70px] justify-center`}
+            title={label}
+        >
+            <Icon className="h-4 w-4 mr-1" />
+            {label}
+        </button>
+    );
+
     return (
-        <div className="overflow-x-auto bg-gray-800 rounded-xl shadow-2xl">
+        <div className="overflow-x-auto bg-[#293749] rounded-xl shadow-2xl border border-gray-700">
             <table className="min-w-full divide-y divide-gray-700">
-                <thead className="bg-gray-700">
+                <thead className="bg-[#1f2937]">
                     <tr>
                         {['Student ID', 'Name', 'Course', 'Department', 'Status', 'Email', 'Actions'].map(header => (
                             <th
                                 key={header}
                                 scope="col"
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                                className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider"
                             >
                                 {header}
                             </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-700">
+                {/* Alternating row colors for better readability, similar to the reference */}
+                <tbody className="divide-y divide-gray-700 text-gray-300">
                     {students.length > 0 ? (
-                        students.map((student) => (
-                            <tr key={student.StudentID} className="hover:bg-gray-700 transition duration-150">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{student.StudentID}</td>
+                        students.map((student, index) => (
+                            <tr 
+                                key={student.StudentID} 
+                                className={`transition duration-150 ${index % 2 === 0 ? 'bg-transparent' : 'bg-[#212f3e] hover:bg-[#293749]'}`}
+                            >
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-300">{student.StudentID}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-white">{student.Name}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{student.Course}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{student.Department}</td>
@@ -196,22 +251,22 @@ const StudentTable = ({ students }) => {
                                         {student.Status}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-teal-400">{student.Email}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button 
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-[#4f46e5]">{student.Email}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex space-x-2">
+                                    <ActionButton
                                         onClick={() => console.log(`Editing ${student.Name}`)}
-                                        className="inline-flex items-center px-3 py-1 mr-2 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition duration-150"
-                                        title="Edit Record"
-                                    >
-                                        <Edit className="h-4 w-4" />
-                                    </button>
-                                    <button 
+                                        label="Edit"
+                                        icon={Edit}
+                                        colorClass="text-[#4f46e5] border border-gray-700 bg-transparent"
+                                        hoverClass="hover:bg-[#4f46e5]/10"
+                                    />
+                                    <ActionButton
                                         onClick={() => console.log(`Archiving ${student.Name}`)}
-                                        className="inline-flex items-center px-3 py-1 bg-red-800/30 text-red-400 rounded-lg hover:bg-red-800/50 transition duration-150"
-                                        title="Archive Record"
-                                    >
-                                        <Archive className="h-4 w-4" />
-                                    </button>
+                                        label="Archive"
+                                        icon={Archive}
+                                        colorClass="text-red-400 border border-gray-700 bg-transparent"
+                                        hoverClass="hover:bg-red-400/10"
+                                    />
                                 </td>
                             </tr>
                         ))
@@ -228,7 +283,7 @@ const StudentTable = ({ students }) => {
     );
 };
 
-// Pagination Component
+// Pagination Component - Updated button styling to match the table
 const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -237,7 +292,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
             onClick={() => onPageChange(page)}
             disabled={disabled}
             className={`px-4 py-2 mx-1 rounded-lg text-sm font-medium transition duration-150
-                ${current ? 'bg-teal-600 text-white shadow-md' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}
+                ${current ? 'bg-[#4f46e5] text-white shadow-md' : 'bg-[#1f2937] text-gray-300 hover:bg-[#293749] border border-gray-700'}
                 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
             `}
         >
@@ -248,24 +303,40 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
     // Simple pagination logic for display
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    // Only show page buttons relevant to the current page/total
+    let displayedPages = [];
+    if (totalPages <= 5) {
+        displayedPages = pages;
+    } else {
+        const start = Math.max(1, currentPage - 2);
+        const end = Math.min(totalPages, currentPage + 2);
+        for (let i = start; i <= end; i++) {
+            displayedPages.push(i);
+        }
+    }
+
+
     return (
         <div className="flex justify-end items-center mt-6">
             <button 
                 onClick={() => onPageChange(currentPage - 1)} 
                 disabled={currentPage === 1}
-                className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-lg mr-2 hover:bg-gray-600 disabled:opacity-50 transition duration-150"
+                className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-[#1f2937] rounded-lg mr-2 hover:bg-[#293749] disabled:opacity-50 transition duration-150 border border-gray-700"
             >
                 <ChevronDown className="h-4 w-4 rotate-90 mr-1" /> Previous
             </button>
             
-            {pages.map(page => (
+            {displayedPages.map(page => (
                 <PageButton key={page} page={page} current={page === currentPage} />
             ))}
+            {totalPages > 5 && currentPage < totalPages - 2 && (
+                <span className="text-gray-400 mx-1">...</span>
+            )}
 
             <button 
                 onClick={() => onPageChange(currentPage + 1)} 
                 disabled={currentPage === totalPages}
-                className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-lg ml-2 hover:bg-gray-600 disabled:opacity-50 transition duration-150"
+                className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-[#1f2937] rounded-lg ml-2 hover:bg-[#293749] disabled:opacity-50 transition duration-150 border border-gray-700"
             >
                 Next <ChevronDown className="h-4 w-4 -rotate-90 ml-1" />
             </button>
@@ -273,33 +344,39 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
     );
 };
 
-// Footer Component
+// Footer Component - Updated to match the centered, darker footer of the reference
 const Footer = () => (
-    <footer className="mt-12 p-6 bg-gray-800 border-t border-gray-700 text-gray-400 text-sm">
+    <footer className="mt-12 p-6 bg-[#1f2937] border-t border-gray-700 text-gray-400 text-sm">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            
+            {/* Nav Links */}
             <div className="flex space-x-6 mb-4 md:mb-0">
                 <a href="#" className="hover:text-white transition duration-150">Legal</a>
                 <a href="#" className="hover:text-white transition duration-150">Company</a>
                 <a href="#" className="hover:text-white transition duration-150">Support</a>
             </div>
+
+            {/* Social Icons (using placeholders for a quick fix) */}
             <div className="flex space-x-4">
-                {/* Mock Social Icons */}
-                <span className="cursor-pointer hover:text-white">♫</span>
-                <span className="cursor-pointer hover:text-white">⅏</span>
-                <span className="cursor-pointer hover:text-white">Ψ</span>
+                <span className="cursor-pointer hover:text-white transition duration-150">🖧</span>
+                <span className="cursor-pointer hover:text-white transition duration-150">🐦</span>
+                <span className="cursor-pointer hover:text-white transition duration-150">📘</span>
+                <span className="cursor-pointer hover:text-white transition duration-150">🚀</span>
             </div>
         </div>
-        <p className="text-xs text-center mt-4">Made with 💜</p>
+        
+        {/* Made With Text */}
+        <p className="text-xs text-center mt-4 flex justify-center items-center text-[#4f46e5]">Made with <LayoutDashboard className="h-4 w-4 ml-1"/></p>
     </footer>
 );
 
 
 // --- Main App Component ---
-export default function App() { // CRITICAL FIX: Ensures this component is the default export
+export default function App() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({ course: '', department: '' });
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5; // Matching the mock data size shown in the image
+    const itemsPerPage = 5;
 
     // Filtering and Searching Logic
     const filteredStudents = useMemo(() => {
@@ -334,20 +411,30 @@ export default function App() { // CRITICAL FIX: Ensures this component is the d
         return filteredStudents.slice(startIndex, startIndex + itemsPerPage);
     }, [filteredStudents, currentPage, itemsPerPage]);
 
+    // NEW LOGIC: Calculate Dynamic Student Statistics
+    const studentStats = useMemo(() => {
+        const total = MOCK_STUDENTS.length;
+        const active = MOCK_STUDENTS.filter(s => s.Status === 'Active').length;
+        // Inactive counts all students who are not explicitly 'Active'
+        const inactive = total - active; 
+        
+        return { total, active, inactive };
+    }, []); // MOCK_STUDENTS is static, so no dependency needed
 
     const handleNewStudent = () => {
-        // We replace alert() with console.log to avoid iframe warnings
         console.log('Action: Open form to add a new student!');
     };
-
+    
+    // Set global background to match the deep dark mode of the reference
     return (
-        <div className="min-h-screen bg-gray-900 font-sans">
+        <div className="min-h-screen bg-[#111827] font-sans"> 
             <Navbar />
             
             <main className="container mx-auto p-4 sm:p-6 lg:p-8">
-                <h1 className="text-3xl font-extrabold text-white mb-6">Students Module</h1>
+                <h1 className="text-2xl font-bold text-white mb-4">Students Module</h1>
                 
-                <HeaderBanner />
+                {/* PASS DYNAMIC STATS TO THE HEADER */}
+                <HeaderBanner studentStats={studentStats} />
                 
                 <FilterBar
                     searchTerm={searchTerm}
