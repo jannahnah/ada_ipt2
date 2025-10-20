@@ -12,19 +12,15 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-require('./components/Routers');
-
-// resources/js/app.js (Example content)
-require('./bootstrap'); 
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Student from './components/student.js'; 
+// Import the Student component
+import Student from './components/student.js';
 
 // Check if the HTML element exists before mounting
 if (document.getElementById('student-app')) {
     ReactDOM.render(<Student />, document.getElementById('student-app'));
 }
 
+require ('./components/Routers.js');
