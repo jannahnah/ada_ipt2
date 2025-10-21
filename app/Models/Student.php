@@ -9,8 +9,10 @@ class Student extends Model
 {
     use HasFactory;
 
-    // Explicitly set the primary key name to match the migration
+    // primary key
     protected $primaryKey = 'StudentID';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     /**
      * The attributes that are mass assignable.
