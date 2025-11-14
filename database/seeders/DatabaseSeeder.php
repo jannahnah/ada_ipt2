@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // This ensures your initial data is always loaded
             InitialDataSeeder::class,
+            // This ensures your users data is always loaded
+            UserSeeder::class,
         ]);
     }
 }

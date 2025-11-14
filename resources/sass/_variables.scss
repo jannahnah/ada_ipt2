@@ -1,7 +1,23 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #f6f7fb;
+
+// Colors (modern minimalist)
+$bg: #f6f7fb;
+$card: #ffffff;
+$text: #0b1220; // slightly deeper
+$muted: #6b7280;
+$accent: #ff7aa2; // energetic pink
+$accent-2: #ffd6eb; // softer pink
+$border: #eaedf3;
+$radius: 10px;
+
+// Spacing & typography
+$gap: 18px;
+$pad: 20px;
+$font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$shadow: 0 8px 24px rgba(12, 23, 52, 0.06);
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;

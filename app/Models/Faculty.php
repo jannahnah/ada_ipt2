@@ -5,33 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Faculty extends Model
 {
     use HasFactory;
 
-    // Expanded fillable attributes to match frontend payloads
     protected $fillable = [
-        'student_id',
+        'faculty_id',
         'first_name',
         'last_name',
         'name',
         'email',
-        'sex',
-        'enrollment_date',
-        'address',
+        'department',
+        'position',
         'phone_number',
         'profile_picture',
-        'course',
-        'department',
-            'academic_year',
-            'year_level',
         'status',
         'region',
         'province',
         'city'
-    ];
-
-    protected $casts = [
-        'enrollment_date' => 'date',
     ];
 }

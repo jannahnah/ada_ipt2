@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Guard the class to avoid "Cannot declare class" errors if this migration is duplicated
-if (! class_exists('CreateUsersTable')) {
-    class CreateUsersTable extends Migration
+if (! class_exists('CreateUsersTableAda')) {
+    class CreateUsersTableAda extends Migration
     {
         public function up()
         {
-            // If the users table already exists, skip creating it to avoid "table already exists" errors.
+            // If a users table already exists (for example from default Laravel installation),
+            // skip creating it to avoid "table already exists" errors.
             if (Schema::hasTable('users')) {
                 return;
             }
@@ -18,11 +18,10 @@ if (! class_exists('CreateUsersTable')) {
             Schema::create('users', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                // keep columns that match your app schema; adjust if you use username/api_token columns elsewhere
+                $table->string('username')->unique();
                 $table->string('email')->unique();
-                $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
-                $table->rememberToken();
+                $table->string('api_token', 100)->nullable()->unique();
                 $table->timestamps();
             });
         }

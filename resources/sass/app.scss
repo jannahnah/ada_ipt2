@@ -4,10 +4,31 @@
 // Variables
 @import 'variables';
 
+// Global base
+body {
+  background: $bg;
+  color: $text;
+  font-family: $font-sans;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 // Example component styles
 @import 'example';
 
-@import 'student';
+// Modules (minimalist)
+@import 'modules/dashboard';
+@import 'modules/student';
+@import 'modules/faculty';
+@import 'modules/report';
+@import 'modules/settings';
+@import 'modules/profile';
+@import 'modules/landing';
+
+// Layout
+@import 'layout';

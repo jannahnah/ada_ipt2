@@ -1,0 +1,32 @@
+@import '../_variables';
+
+.module-dashboard {
+  background: $bg;
+  color: $text;
+  font-family: $font-sans;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $gap;
+    margin-bottom: $gap;
+    h1 { font-size: 1.25rem; margin: 0; }
+    .meta { color: $muted; font-size: 0.9rem; }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: $gap;
+  }
+
+  .card {
+    background: $card;
+    border-radius: $radius;
+    padding: $pad;
+    box-shadow: $shadow;
+    border: 1px solid $border;
+    .title { font-weight: 600; margin-bottom: 8px; }
+    .value { font-size: 1.5rem; color: $accent; }
+  }
+}

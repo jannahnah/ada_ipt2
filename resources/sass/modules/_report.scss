@@ -1,0 +1,273 @@
+@import '../_variables';
+
+.module-report {
+  font-family: $font-sans;
+  color: $text;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  .report-hero {
+    background: $card;
+    padding: calc($pad + 10px);
+    border-radius: 24px;
+    box-shadow: $shadow;
+    border: 1px solid $border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      color: $text;
+    }
+
+    .subtext {
+      margin: 4px 0 0;
+      color: $muted;
+      font-size: 15px;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .ghost-btn {
+    border-radius: 12px;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  }
+
+  .primary-btn {
+    background: $accent;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 122, 162, 0.35);
+  }
+
+  .secondary-btn {
+    background: #111827;
+    color: #fff;
+  }
+
+  .ghost-btn {
+    background: transparent;
+    border: 1px solid $border;
+    color: $text;
+  }
+
+  .primary-btn:hover,
+  .secondary-btn:hover,
+  .ghost-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+  }
+
+  .panel {
+    background: $card;
+    border-radius: 20px;
+    border: 1px solid $border;
+    box-shadow: $shadow;
+    padding: $pad;
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    small {
+      color: $muted;
+      font-size: 14px;
+    }
+  }
+
+  .panel-meta {
+    font-size: 13px;
+    color: $muted;
+    min-width: 180px;
+    text-align: right;
+  }
+
+  .filters {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-select {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $muted;
+
+    label {
+      font-size: 12px;
+    }
+
+    select {
+      border-radius: 12px;
+      border: 1px solid $border;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text;
+      background: $card;
+      appearance: none;
+    }
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .summary-card {
+    background: #f9fafc;
+    border-radius: 16px;
+    border: 1px solid #e4e7ef;
+    padding: 18px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      color: $muted;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 28px;
+      color: $text;
+    }
+  }
+
+  .table-wrapper {
+    overflow: auto;
+    border-radius: 16px;
+    border: 1px solid $border;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+
+  th,
+  td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+    color: $text;
+  }
+
+  th {
+    color: $muted;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid $border;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #f2f4fa;
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+
+  .status-enrolled,
+  .status-active {
+    background: #e0f2ff;
+    color: #075985;
+  }
+
+  .status-graduated,
+  .status-retired {
+    background: #f8fafc;
+    color: #475467;
+  }
+
+  .status-on-probation,
+  .status-on-leave {
+    background: #fff7ed;
+    color: #92400e;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 28px 0;
+    color: $muted;
+    font-weight: 500;
+  }
+
+  .error-message {
+    color: #b91c1c;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .report-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .panel-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .panel-meta {
+      text-align: left;
+    }
+  }
+}
