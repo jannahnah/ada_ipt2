@@ -211,7 +211,80 @@ class InitialDataSeeder extends Seeder
 
         // Insert students only if students table exists and there are items
         if (Schema::hasTable('students') && !empty($students)) {
-            DB::table('students')->insert($students);
+            $insertRows = [];
+            foreach ($students as $s) {
+                $row = [];
+
+                // map name fields
+                if (Schema::hasColumn('students', 'first_name')) {
+                    $row['first_name'] = $s['FirstName'] ?? ($s['first_name'] ?? null);
+                } elseif (Schema::hasColumn('students', 'FirstName')) {
+                    $row['FirstName'] = $s['FirstName'] ?? null;
+                }
+
+                if (Schema::hasColumn('students', 'last_name')) {
+                    $row['last_name'] = $s['LastName'] ?? ($s['last_name'] ?? null);
+                } elseif (Schema::hasColumn('students', 'LastName')) {
+                    $row['LastName'] = $s['LastName'] ?? null;
+                }
+
+                // enrollment date
+                if (Schema::hasColumn('students', 'enrollment_date')) {
+                    $row['enrollment_date'] = $s['EnrollmentDate'] ?? ($s['enrollment_date'] ?? null);
+                } elseif (Schema::hasColumn('students', 'EnrollmentDate')) {
+                    $row['EnrollmentDate'] = $s['EnrollmentDate'] ?? null;
+                }
+
+                // email and status
+                if (Schema::hasColumn('students', 'email')) {
+                    $row['email'] = $s['Email'] ?? ($s['email'] ?? null);
+                }
+                if (Schema::hasColumn('students', 'status')) {
+                    $row['status'] = $s['Status'] ?? ($s['status'] ?? null);
+                }
+
+                // map department/course/academic year IDs if present
+                if (Schema::hasColumn('students', 'DepartmentID')) {
+                    $row['DepartmentID'] = $s['DepartmentID'] ?? null;
+                } elseif (Schema::hasColumn('students', 'department')) {
+                    // students table may store department name/code in a string column
+                    if (! empty($s['DepartmentID'])) {
+                        $row['department'] = $s['DepartmentID'];
+                    }
+                }
+
+                if (Schema::hasColumn('students', 'CourseID')) {
+                    $row['CourseID'] = $s['CourseID'] ?? null;
+                } elseif (Schema::hasColumn('students', 'course')) {
+                    if (! empty($s['CourseID'])) {
+                        $row['course'] = $s['CourseID'];
+                    }
+                }
+
+                if (Schema::hasColumn('students', 'AcademicYearID')) {
+                    $row['AcademicYearID'] = $s['AcademicYearID'] ?? null;
+                } elseif (Schema::hasColumn('students', 'academic_year')) {
+                    $row['academic_year'] = $s['AcademicYearID'] ?? ($s['academic_year'] ?? null);
+                }
+
+                // timestamps
+                if (isset($s['created_at'])) $row['created_at'] = $s['created_at'];
+                if (isset($s['updated_at'])) $row['updated_at'] = $s['updated_at'];
+
+                // fallback: if email is missing but Email exists in table, try that
+                if (empty($row) && is_array($s)) {
+                    $row = $s;
+                }
+
+                // only insert non-empty rows
+                if (! empty($row)) {
+                    $insertRows[] = $row;
+                }
+            }
+
+            if (! empty($insertRows)) {
+                DB::table('students')->insert($insertRows);
+            }
         }
     }
 }

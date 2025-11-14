@@ -9,10 +9,10 @@ import Faculty from "./Faculty";
 import Report from "./Report";
 import Layout from "./Layout";
 
-// inline simple module placeholders so the router doesn't depend on other files
-function Dashboard() { return <div><h3>Dashboard</h3><p>Welcome to the dashboard.</p></div>; }
-function Settings() { return <div><h3>System Settings</h3><p>Configure system options.</p></div>; }
-function Profile() { return <div><h3>Profile</h3><p>User profile and preferences.</p></div>; }
+// Use the real Settings and Profile components so the routes render full pages
+import Settings from "./Settings";
+import Profile from "./Profile";
+import Dashboard from "./Dashboard";
 
 // Use the shared `Layout` component from `components/Layout.js` (sidebar + topbar)
 
